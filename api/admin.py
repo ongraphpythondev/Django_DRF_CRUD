@@ -5,4 +5,6 @@ from .models import Comment
 # Register your models here.
 
 
-admin.site.register(Comment)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['id' , 'msg' , 'user' , 'created_on']
