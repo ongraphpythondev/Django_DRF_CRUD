@@ -16,7 +16,6 @@ class CommentListApiView(APIView):
     queryset = Comment.objects.all()
     
     def get(self, request):
-        comment = Comment.objects.filter(user = request.user.id)
         serializer = CommentSerializer(Comment.objects.all() ,many = True)
         return Response(serializer.data , status = status.HTTP_200_OK)
     
