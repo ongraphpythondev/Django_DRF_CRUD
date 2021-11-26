@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from api.models import Comment
 from api.serializers import CommentSerializer
 
@@ -16,6 +18,7 @@ from api.serializers import CommentSerializer
 # List view of overall data
 class CommentListApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
     
     # listing data from db
     def get(self, request):
@@ -34,6 +37,7 @@ class CommentListApiView(APIView):
 # Detailed view of specifed data
 class CommentDetailApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
     
     # retrieving data from db
     def get_object(self , pk):
