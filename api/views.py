@@ -35,16 +35,21 @@ class CommentDetailApiView(APIView):
     def get_object(self , pk):
         try:
             return Comment.objects.get(pk = pk)
-        except :
-            return Response(status = status.HTTP_404_NOT_FOUND)
+        except Comment.DoesNotExist:
+            return None
     
     def get(self,request , pk):
         comment = self.get_object(pk)
+        if not comment :
+            return Response({'Not Found' : 'Object does not exist'} , status = status.HTTP_400_BAD_REQUEST)
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
     
     def put(self , request , pk):
         comment = self.get_object(pk)
+        if not comment :
+            return Response({'Not Found' : 'Object does not exist'} , status = status.HTTP_400_BAD_REQUEST)
+        
         serializer = CommentSerializer(comment , data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -53,6 +58,9 @@ class CommentDetailApiView(APIView):
         
     def patch(self, request , pk):
         comment = self.get_object(pk)
+        if not comment :
+            return Response({'Not Found' : 'Object does not exist'} , status = status.HTTP_400_BAD_REQUEST)
+        
         data = request.data
         
         comment.msg = data.get('msg' , comment.msg)
@@ -64,8 +72,17 @@ class CommentDetailApiView(APIView):
         
         return Response(serializer.data)
         
+    def delete(self , request , pk):
+        comment = self.get_object(pk)
         
-        
+        if not comment :
+            return Response({'Not Found' : 'Object does not exist'} , status = status.HTTP_400_BAD_REQUEST)
+        else:
+            comment.delete()
+            return Response(
+                {'success' : 'Object deleted successfully !'},
+                status = status.HTTP_200_OK
+            )
         
         
         
