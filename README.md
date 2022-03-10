@@ -1,4 +1,4 @@
-# Test_API
+# Django_DRF_CRUD
 - This poc contains Django Rest API CRUD Operation which is performed on simple comment Model(db table).
 - All basic CRUD - Create, Read, Update and Delete operation along with Patch (partial update) .
 
