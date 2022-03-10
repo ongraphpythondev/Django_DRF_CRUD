@@ -22,13 +22,13 @@ pip3 install virtualenv #if using linux(for python 3 and above)
 
 
 ## Installation and Running :
-
-- bash
+**bash**
+- This will clone whole project
 ```
 git clone https://github.com/ongraphpythondev/Django_DRF_CRUD.git
 ```
-- This will clone whole project
 
+**Python Virtual Environment**
 ```
 virtualenv venv 
 ```
